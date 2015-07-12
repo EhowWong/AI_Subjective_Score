@@ -1,0 +1,21 @@
+.table{
+	font-size: 12px;
+	font-weight: 200;
+	border-collapse:collapse;
+	border-width: 1px;
+	BORDER-top: black 1px solid; 
+	BORDER-bottom: black 1px solid;
+	BORDER-left: black 1px solid; 
+	BORDER-right: black 1px solid; 
+}
+.table td{
+			font-size:12px;
+			BORDER-top: black 1px solid; 
+			BORDER-bottom: black 1px solid;
+			BORDER-left: black 1px solid; 
+			BORDER-right: black 1px solid; 
+		}
+.bgImage{
+	background:url(../images/44.jpg);
+}
+	

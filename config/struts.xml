@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Development Mode -->
+	<constant name="struts.devMode" value="false" />
+	
+	<package name="front" extends="struts-default" namespace="/">
+		<action name="studentLoginInput">
+			<result>/s-login.jsp</result>
+		</action>
+		<action name="studentLoginAgainInput">
+			<result>/s-Alogin.jsp</result>
+		</action>
+		<action name="teacherLoginInput">
+			<result>/t-login.jsp</result>
+		</action>
+		<action name="studentLogin" class="com.exam.action.student.LoginAction">
+			<result name="error" type="chain">
+				<param name="actionName">studentLoginInput</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="success" type="chain">
+				<param name="actionName">showPaper</param>
+				<param name="namespace">/s</param>
+			</result>
+		</action>
+		<action name="teacherLogin" class="com.exam.action.teacher.LoginAction">
+			<result>/teacher/index.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 教师 -->
+	<package name="teacher" extends="struts-default" namespace="/t">
+		<action name="findTestSubjectiveList" class="com.exam.action.teacher.TestAction" method="findTestSubjectiveList">
+			<result>/teacher/show_subjective.jsp</result>
+		</action>
+		<action name="findTestObjectiveList" class="com.exam.action.teacher.TestAction" method="findTestObjectiveList">
+			<result>/teacher/show_objective.jsp</result>
+		</action>
+		<action name="addTestChoice" class="com.exam.action.teacher.TestAction" method="addTestChoice">
+			<result name="success" type="chain">
+				<param name="actionName">findTestObjectiveList</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="addTestJudge" class="com.exam.action.teacher.TestAction" method="addTestJudge">
+			<result name="success" type="chain">
+				<param name="actionName">findTestObjectiveList</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="addTestSub" class="com.exam.action.teacher.TestAction" method="addTestSub">
+			<result name="success" type="chain">
+				<param name="actionName">findTestSubjectiveList</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="delTestObjective" class="com.exam.action.teacher.TestAction" method="delTestObjective">
+			<result name="success" type="chain">
+				<param name="actionName">findTestObjectiveList</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="delTestSubjective" class="com.exam.action.teacher.TestAction" method="delTestSubjective">
+			<result name="success" type="chain">
+				<param name="actionName">findTestSubjectiveList</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="modifyTestSub" class="com.exam.action.teacher.TestAction" method="modifyTestSub">
+			<!-- <result>/teacher/modifyTest_Sub.jsp</result> -->
+			<result name="success" type="chain">
+				<param name="actionName">findTestSubjectiveList</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="modifyTestChoice" class="com.exam.action.teacher.TestAction" method="modifyTestChoice">
+			<!-- <result>/teacher/modifyTest_Choice.jsp</result> -->
+			<result name="success" type="chain">
+				<param name="actionName">findTestObjectiveList</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="modifyTestJudge" class="com.exam.action.teacher.TestAction" method="modifyTestJudge">
+			<!-- <result>/teacher/modifyTest_Judge.jsp</result> -->
+			<result name="success" type="chain">
+				<param name="actionName">findTestObjectiveList</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="findObjective" class="com.exam.action.teacher.TestAction" method="findObjective">
+			<result>/teacher/modifyTest_Choice.jsp</result>
+		</action>
+		<action name="showObjective" class="com.exam.action.teacher.TestAction" method="findObjective">
+			<result>/teacher/show_choice_detail.jsp</result>
+		</action>
+		<action name="findObjectiveJudge" class="com.exam.action.teacher.TestAction" method="findObjectiveJudge">
+			<result>/teacher/modifyTest_Judge.jsp</result>
+		</action>
+		<action name="showObjectiveJudge" class="com.exam.action.teacher.TestAction" method="findObjectiveJudge">
+			<result>/teacher/show_judge_detail.jsp</result>
+		</action>
+		<action name="findSubjective" class="com.exam.action.teacher.TestAction" method="findSubjective">
+			<result>/teacher/modifyTest_Sub.jsp</result>
+		</action>
+		<action name="showSubjective" class="com.exam.action.teacher.TestAction" method="findSubjective">
+			<result>/teacher/show_sub_detail.jsp</result>
+		</action>
+		<action name="addToPaper" class="com.exam.action.teacher.PaperAction" method="addToPaper">
+			<result name="success" type="chain">
+				<param name="actionName">FindTest</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="showAllPaper" class="com.exam.action.teacher.PaperAction" method="showAllPaper">
+			<result>/teacher/showPaper.jsp</result>
+		</action>
+		<action name="showAllPaper2" class="com.exam.action.teacher.PaperAction" method="showAllPaper2">
+			<result>/teacher/showDetail.jsp</result>
+		</action>
+		<action name="showName" class="com.exam.action.teacher.TestAction" method="showName">
+			<result>/teacher/showName.jsp</result>
+		</action>
+		<action name="FindTest" class="com.exam.action.teacher.PaperAction" method="FindTest">
+			<result>/teacher/showPaperTest.jsp</result>
+		</action>
+		<action name="showAnswer" class="com.exam.action.teacher.TestAction" method="showObjAnswer">
+			<result>/teacher/showAnswerDetail.jsp</result>
+		</action>
+		<action name="deleteObFromPaper" class="com.exam.action.teacher.PaperAction" method="deleteObFromPaper">
+			<result name="success" type="chain">
+				<param name="actionName">success</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="deleteSubFromPaper" class="com.exam.action.teacher.PaperAction" method="deleteSubFromPaper">
+			<result name="success" type="chain">
+				<param name="actionName">success</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="addPaper" class="com.exam.action.teacher.PaperAction" method="addPaper">
+			<result name="success" type="chain">
+				<param name="actionName">showAllPaper</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="deletePaper" class="com.exam.action.teacher.PaperAction" method="deletePaper">
+			<result name="success" type="chain">
+				<param name="actionName">showAllPaper</param>
+				<param name="namespace">/t</param>
+			</result>
+		</action>
+		<action name="success" class="com.exam.action.teacher.PaperAction" method="success">
+			<result>/teacher/success.jsp</result>
+		</action>
+		<action name="differ" class="com.exam.action.teacher.PaperAction" method="differ">
+			<result>/teacher/addPaper.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 学生 -->
+	<package name="student" extends="struts-default" namespace="/s">
+		<!-- <action name="showCourse" class="com.exam.action.student.StudentAction" method="showCourse">
+				<result>/student/showCourse.jsp</result>
+			</action>
+		 -->
+		<action name="showPaper" class="com.exam.action.student.StudentAction" method="showPaper">
+			<result>/student/showPaper.jsp</result>
+		</action>
+		<action name="showQuestions" class="com.exam.action.student.StudentAction" method="showQuestions">
+			<result>/student/showExam.jsp</result>
+		</action>
+		<action name="showResults" class="com.exam.action.student.StudentAction" method="showResults">
+			<result>/student/result.jsp</result>
+		</action>
+		
+	</package>
+	
+</struts>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
